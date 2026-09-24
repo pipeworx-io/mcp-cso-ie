@@ -3,7 +3,7 @@
   "name": "io.github.pipeworx-io/cso-ie",
   "title": "Cso Ie",
   "description": "Ireland Central Statistics Office (CSO) PxStat MCP.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "websiteUrl": "https://pipeworx.io/packs/cso-ie",
   "repository": {
     "url": "https://github.com/pipeworx-io/mcp-cso-ie",
