@@ -1,0 +1,72 @@
+[
+  {
+    "name": "list_datasets",
+    "description": "Search the CSO catalog of ~12,600 Irish statistics tables. Returns matching tables with their matrix code (e.g. \"CPM01\"), label, dimensions, and last-updated date. The full catalog is large, so always pass a keyword query to narrow it.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Keyword(s) matched against table label and matrix code, e.g. \"consumer price\", \"population\", \"QLF\". Case-insensitive."
+        },
+        "limit": {
+          "type": "number",
+          "description": "Max results to return (default 50, max 200)."
+        }
+      }
+    }
+  },
+  {
+    "name": "dataset_metadata",
+    "description": "Get the structure of one CSO table by matrix code: its dimensions, the category codes + human labels for each dimension, size, and last-updated date. Use this to discover valid dimension codes before calling get_dataset with filters.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "matrix": {
+          "type": "string",
+          "description": "Matrix code, e.g. \"CPM01\" (Consumer Price Index) or \"QLF18\" (labour force)."
+        }
+      },
+      "required": [
+        "matrix"
+      ]
+    }
+  },
+  {
+    "name": "get_dataset",
+    "description": "Read a full CSO table as JSON-stat 2.0 (dimensions + flat value array). Some tables are large (the CPI table is ~60k values); use dataset_metadata first to gauge size, or use query_dataset to fetch a filtered slice instead.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "matrix": {
+          "type": "string",
+          "description": "Matrix code, e.g. \"CPM01\"."
+        }
+      },
+      "required": [
+        "matrix"
+      ]
+    }
+  },
+  {
+    "name": "query_dataset",
+    "description": "Read a FILTERED slice of a CSO table via JSON-RPC. Pass a map of dimension code -> array of category index values to keep (get the dimension codes and category index values from dataset_metadata). Returns JSON-stat 2.0 covering only the selected cells — far smaller than get_dataset.",
+    "inputSchema": {
+      "type": "object",
+      "properties": {
+        "matrix": {
+          "type": "string",
+          "description": "Matrix code, e.g. \"CPM01\"."
+        },
+        "filters": {
+          "type": "object",
+          "description": "Map of dimension code to an array of category index values to keep, e.g. {\"STATISTIC\":[\"CPM01C08\"],\"TLIST(M1)\":[\"202512\"]}. Dimensions you omit are returned in full. Time dimensions like TLIST(M1) use YYYYMM index values (e.g. \"202512\")."
+        }
+      },
+      "required": [
+        "matrix",
+        "filters"
+      ]
+    }
+  }
+]
