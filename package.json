@@ -1,6 +1,6 @@
 {
   "name": "@pipeworx/mcp-cso-ie",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Ireland Central Statistics Office (CSO) PxStat MCP.",
   "type": "module",
   "main": "lib/index.js",
@@ -27,7 +27,7 @@
     "mode": "gateway",
     "slug": "cso-ie",
     "gatewaySlug": "cso-ie",
-    "sourceHash": "v1-05102343a649e87316e63b5b143e241999abfe3c89c4c12182d4effcf28a6451",
-    "sourceCommit": "0b3faaa4d85299a961dd86dea75a0f0e1dad280c"
+    "sourceHash": "v1-7b7f204c1749f533e76ae70204fe6f578d36be36d6f1f9c93fb8189ac3d3f2e9",
+    "sourceCommit": "8cc978183948532674e797c429305c9d8ab2a1c3"
   }
 }
